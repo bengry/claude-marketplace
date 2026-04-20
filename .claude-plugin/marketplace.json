@@ -1,0 +1,19 @@
+{
+  "name": "claude-bookmark",
+  "description": "Bookmark Claude Code sessions for later resume, with an fzf-powered TUI picker.",
+  "owner": { "name": "bengry" },
+  "metadata": {
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-bookmark",
+      "description": "Bookmark Claude Code sessions for later resume, with an fzf-powered TUI picker.",
+      "version": "0.1.0",
+      "source": ".",
+      "author": { "name": "bengry" },
+      "category": "productivity",
+      "keywords": ["bookmark", "session", "resume", "fzf", "tui"]
+    }
+  ]
+}
