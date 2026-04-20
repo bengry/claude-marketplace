@@ -1,81 +1,41 @@
-# claude-bookmark
+# bengry's Claude Code marketplace
 
-Bookmark Claude Code sessions for later resume, with an `fzf`-powered TUI picker.
+A small marketplace of [Claude Code](https://docs.claude.com/en/docs/claude-code) plugins by [@bengry](https://github.com/bengry).
 
-Save the current session in one keystroke. Browse, preview, and resume past sessions from any terminal — fuzzy search by name or path, see the last user message in a preview pane, hit `enter` to drop back into that conversation.
-
-## Install
+## Add the marketplace
 
 Inside Claude Code:
 
 ```
-/plugin marketplace add bengry/claude-bookmark
-/plugin install claude-bookmark@claude-bookmark
-/bookmark-setup
+/plugin marketplace add bengry/claude-marketplace
 ```
 
-`/bookmark-setup` symlinks the `claude-bookmark` CLI into `~/.local/bin` and installs shell completion for your detected shell (`fish`, `bash`, or `zsh`). Override with `/bookmark-setup zsh` if needed.
+Then install any plugin from the list below with:
 
-### Dependencies
-
-- `jq` (required)
-- `fzf` (required for the interactive TUI)
-- `pbcopy` (macOS, optional — for `ctrl-y` clipboard copy)
-
-```sh
-brew install jq fzf
+```
+/plugin install <plugin-name>@bengry-marketplace
 ```
 
-## Slash commands
+## Plugins
 
-| Command | What it does |
+| Plugin | Description |
 |---|---|
-| `/bookmark [name]` | Bookmark the current session. If no name is given, Claude generates a one-sentence summary. |
-| `/bookmarks` | Print all bookmarks (plain list — slash command output is captured, not interactive). |
-| `/bookmark-setup [shell]` | (Re)install CLI symlink + shell completion. |
+| [`claude-bookmark`](plugins/claude-bookmark/) | Bookmark Claude Code sessions for later resume, with an `fzf`-powered TUI picker. |
 
-## Terminal CLI
-
-Run `claude-bookmark` (no args) to open the interactive TUI:
+## Layout
 
 ```
-bookmark> █                        ┌── name:    Fixing the /bookmark slash command…
-▸ Fixing the /bookmark slash …   │  cwd:     /Users/bengr/projects-personal
-  Designing /bookmark             │  created: 2026-04-20T22:36:39Z
-  Investigating ingest backlog    │  session: f9541ddc-b258-499d-899f-2628f4c660f3
-                                  │  resume:  claude --resume f9541ddc-…
-                                  │
-                                  │  ── last user message ─────────────────
-                                  │  can we change the `claude-bookmark` …
+.claude-plugin/marketplace.json   # marketplace manifest (this repo)
+plugins/
+└── claude-bookmark/              # one directory per plugin
+    ├── .claude-plugin/plugin.json
+    ├── commands/
+    ├── scripts/
+    ├── completions/
+    └── README.md
 ```
 
-### TUI keys
-
-| Key | Action |
-|---|---|
-| `enter` | Resume the selected session (`claude --resume <uuid>`) |
-| `ctrl-d` | Delete the bookmark, then reopen the picker |
-| `ctrl-y` | Copy the session UUID to clipboard (macOS) |
-| `esc` | Cancel |
-
-### Subcommands
-
-```sh
-claude-bookmark                       # interactive TUI (or plain list if not on a tty)
-claude-bookmark tui                   # force interactive picker
-claude-bookmark list                  # plain list (always)
-claude-bookmark resume <name|uuid>    # print 'claude --resume <uuid>' + clipboard
-claude-bookmark delete <name|uuid>    # remove a bookmark
-claude-bookmark rename <old> <new>    # rename (use --force to overwrite)
-claude-bookmark prune                 # drop entries whose transcripts are gone
-claude-bookmark --help                # full usage
-```
-
-Tab completion (in `fish`, `bash`, or `zsh`) suggests subcommands and completes bookmark names from `~/.claude/bookmarks.json`.
-
-## Storage
-
-Bookmarks are stored as a single JSON array at `~/.claude/bookmarks.json`. Each entry tracks `name`, `session_id`, `cwd`, `created_at`, and `transcript_path`.
+Each plugin has its own README with full install + usage details.
 
 ## License
 

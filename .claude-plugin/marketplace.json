@@ -1,6 +1,6 @@
 {
-  "name": "claude-bookmark",
-  "description": "Bookmark Claude Code sessions for later resume, with an fzf-powered TUI picker.",
+  "name": "bengry-marketplace",
+  "description": "bengry's Claude Code plugins.",
   "owner": { "name": "bengry" },
   "metadata": {
     "version": "0.1.0"
@@ -13,7 +13,8 @@
       "source": "./plugins/claude-bookmark",
       "author": { "name": "bengry" },
       "category": "productivity",
-      "keywords": ["bookmark", "session", "resume", "fzf", "tui"]
+      "keywords": ["bookmark", "session", "resume", "fzf", "tui"],
+      "homepage": "https://github.com/bengry/claude-marketplace/tree/main/plugins/claude-bookmark"
     }
   ]
 }
