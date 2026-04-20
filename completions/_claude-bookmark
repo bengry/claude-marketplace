@@ -1,0 +1,44 @@
+#compdef claude-bookmark
+# Zsh completion for claude-bookmark
+# Install path: ${XDG_DATA_HOME:-~/.local/share}/zsh/site-functions/_claude-bookmark
+# Then: fpath=($dir $fpath); autoload -U compinit && compinit
+
+_claude_bookmark() {
+    local -a subcommands
+    subcommands=(
+        'tui:Interactive picker (fzf TUI)'
+        'list:Plain list of bookmarks'
+        'save:Save a session bookmark'
+        'resume:Print resume command (+ clipboard)'
+        'delete:Delete a bookmark'
+        'rename:Rename a bookmark'
+        'prune:Remove bookmarks whose transcripts are gone'
+        'help:Show help'
+    )
+
+    if (( CURRENT == 2 )); then
+        _describe -t commands 'subcommand' subcommands
+        _arguments \
+            '(- *)'{-h,--help}'[Show help]'
+        return
+    fi
+
+    local sub="${words[2]}"
+    case "$sub" in
+        resume|r|delete|rm|rename)
+            if (( CURRENT == 3 )) && (( $+commands[jq] )) && [[ -f "$HOME/.claude/bookmarks.json" ]]; then
+                local -a names
+                names=("${(@f)$(jq -r '.[].name' "$HOME/.claude/bookmarks.json" 2>/dev/null)}")
+                _describe -t bookmarks 'bookmark' names
+                return
+            fi
+            ;;
+    esac
+
+    if [[ "$sub" == "rename" ]] && (( CURRENT >= 4 )); then
+        _arguments '--force[Overwrite existing bookmark with new name]'
+        return
+    fi
+}
+
+_claude_bookmark "$@"

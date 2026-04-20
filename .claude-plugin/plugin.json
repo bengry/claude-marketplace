@@ -1,0 +1,9 @@
+{
+  "name": "claude-bookmark",
+  "version": "0.1.0",
+  "description": "Bookmark Claude Code sessions for later resume, with an fzf-powered TUI picker.",
+  "author": { "name": "bengr" },
+  "license": "MIT",
+  "keywords": ["bookmark", "session", "resume", "fzf", "tui"],
+  "commands": "commands/"
+}
