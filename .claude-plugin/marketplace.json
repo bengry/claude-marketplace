@@ -10,7 +10,7 @@
       "name": "claude-bookmark",
       "description": "Bookmark Claude Code sessions for later resume, with an fzf-powered TUI picker.",
       "version": "0.1.0",
-      "source": ".",
+      "source": "./plugins/claude-bookmark",
       "author": { "name": "bengry" },
       "category": "productivity",
       "keywords": ["bookmark", "session", "resume", "fzf", "tui"]
