@@ -5,6 +5,5 @@
   "author": { "name": "bengry" },
   "repository": "https://github.com/bengry/claude-marketplace",
   "license": "MIT",
-  "keywords": ["bookmark", "session", "resume", "fzf", "tui"],
-  "commands": "commands/"
+  "keywords": ["bookmark", "session", "resume", "fzf", "tui"]
 }
